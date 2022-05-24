@@ -110,7 +110,7 @@ def start_ping(net):
 
 def start_webserver(net):
     h1 = net.get("h1")
-    proc = h1.popen("python webserver.py", shell=True)
+    proc = h1.popen("python3 webserver.py", shell=True)
     sleep(1)
     return [proc]
 
