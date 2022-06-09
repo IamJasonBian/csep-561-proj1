@@ -13,6 +13,7 @@ from argparse import ArgumentParser
 
 from monitor import monitor_qlen
 
+import helper
 import sys
 import os
 import math
@@ -52,7 +53,7 @@ parser.add_argument(
 # --cong cubic and see what happens...
 # sysctl -a | grep cong should list some interesting parameters.
 parser.add_argument(
-    "--cong", help="Congestion control algorithm to use", default="reno"
+    "--cong", "-c", help="Congestion control algorithm to use", default="reno"
 )
 
 # Expt parameters
@@ -108,6 +109,7 @@ def start_iperf(net):
     client = h1.popen(cmd)
 
 def start_qmon(iface, interval_sec=0.1, outfile="q.txt"):
+
     monitor = Process(target=monitor_qlen, args=(iface, interval_sec, outfile))
     monitor.start()
     return monitor
